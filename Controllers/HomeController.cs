@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Dal.ApplicationStorage;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ocrent.Models;
+using Models.DatabaseModels;
 using System.Diagnostics;
 
 namespace ocrent.Controllers

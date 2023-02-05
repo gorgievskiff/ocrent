@@ -1,14 +1,23 @@
 using Microsoft.AspNetCore.Identity;
-using ocrent.Models;
+using Models.DatabaseModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Dal.ApplicationStorage;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Dal.ApplicationStorage.DataAccess.Abstract;
+using Dal.ApplicationStorage.DataAccess.Concrete;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(opt => opt.Filters.Add(new AutoValidateAntiforgeryTokenAttribute()));
+
+// Data Access scoped
+builder.Services.TryAddScoped<IIdentityCustomDa, IdentityDa>();
 
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -18,6 +27,15 @@ builder.Services.AddSession(options => {
 });
 
 builder.Services.AddEntityFrameworkNpgsql().AddDbContext<ApiContext>();
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+        options.SlidingExpiration = true;
+        options.AccessDeniedPath = "/Forbidden/";
+    });
+
 
 var app = builder.Build();
 

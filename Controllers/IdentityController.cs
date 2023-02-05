@@ -1,19 +1,25 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
-using ocrent.Models;
 using System.Security.Claims;
 using System.Diagnostics;
+using Dal.ApplicationStorage;
+using Models.DatabaseModels;
+using Dal.ApplicationStorage.DataAccess.Abstract;
+using Models.DataTransferObjects;
+using System.Text.RegularExpressions;
 
 namespace ocrent.Controllers
 {
     public class IdentityController : Controller
     {
-        private ApiContext _context;
+        private readonly IIdentityCustomDa _identityDa;
+        private List<Claim> claims;
 
-        public IdentityController(ApiContext context)
+        public IdentityController(IIdentityCustomDa identityDa)
         {
-            _context = context;
+            _identityDa = identityDa;
+            claims = new List<Claim>();
         }
     
         public IActionResult Index()
@@ -27,15 +33,16 @@ namespace ocrent.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(User user)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register(RegisterDTO registerInfo)
         {
-            user.CreatedOn = DateOnly.FromDateTime(DateTime.Now);
-            _context.Users.Add(user);
-            _context.SaveChanges();
-            return RedirectToAction("Index", "Home");
+            if (ModelState.IsValid)
+            {
+                await _identityDa.Register(registerInfo);
+                return RedirectToAction("Login", "Identity");
+            }
+            return View("Register");
         }
-
-
 
         public async Task<IActionResult> Login()
         {
@@ -43,24 +50,56 @@ namespace ocrent.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Login(User model)
+        public async Task<ActionResult> Login(LoginDTO model)
         {
             if (ModelState.IsValid)
             {
-                var userdetails = 1;
-                if (userdetails == null)
+                var userdetails = await _identityDa.CheckLoginInformation(model);
+                if (!userdetails.ValidPassword || !userdetails.ValidEmail)
                 {
-                    ModelState.AddModelError("Password", "Invalid login attempt.");
-                    return View("Index");
+                    if (!userdetails.ValidEmail)
+                        ModelState.AddModelError("Email", "Wrong email or password.");
+                    else
+                        ModelState.AddModelError("Password", "Wrong password.");
+                    
+                    return View("Login");
                 }
-                HttpContext.Session.SetString("userId", "Filip");
+                HttpContext.Session.SetString("userId", userdetails.UserId.ToString());
+                HttpContext.Session.SetString("email", userdetails.Email);
+
+                //TODO-> Add claims based on user, Adminstrator, Client and BusinessUser
+                //Make logic for getting if user is administrator, client or business user in DataAccess Layer
+                //Change claims values from hardcoded strings to StaticDetail enum
+
+               await AddClaimAsync(model.Email, "BusinessUser");
 
             }
             else
             {
-                return View("Index");
+                return View("Login");
             }
             return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult TestClaimReading()
+        {
+            var email = HttpContext.Session.GetString("email");
+            var customClaim = HttpContext.User.FindFirst(email);
+
+            return Content($"User ovoj has custom claim value: {customClaim.Value}");
+        }
+
+        private async Task AddClaimAsync(string email, string claimType)
+        {
+            Claim claim = new Claim(email, claimType);
+            claims.Add(claim);
+
+            var claimsIdentity = new ClaimsIdentity(
+                claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+            await HttpContext.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                new ClaimsPrincipal(claimsIdentity));
         }
 
         public IActionResult Logout()
