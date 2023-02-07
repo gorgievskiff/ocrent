@@ -1,0 +1,88 @@
+﻿@model Models.ViewModels.SearchViewModel
+
+{
+    ViewData["Title"] = "Search";
+}
+
+<div class="container py-5 search-area">
+    <h1 class="text-light">Find your car</h1>
+    <form class="search-wrapper" method="post" enctype="multipart/form-data" >
+        <div class="d-flex justify-content-center align-items-center flex-column">
+            <label for="city-list">Select city</label>
+            @Html.DropDownListFor(x => x.Locations, new SelectList(@Model.Locations, "CityName", "CityName"), "", new { @class = "form-control", id="city-list"})
+        </div>
+        <div class="d-flex justify-content-center align-items-center flex-column">
+            <label for="brand-list">Select brand</label>
+            @Html.DropDownListFor(x => x.Brands, new SelectList(@Model.Brands, "BrandName", "BrandName"), "", new { @class = "form-control", id="brand-list"})
+        </div>
+        <div class="d-flex justify-content-center align-items-center flex-column">
+            <label class="m-1 form-label" for="kt_daterangepicker_1">Select date & time</label>
+            <input id="picker" class="form-control" style="min-width: 350px;" name="dates" autocomplete="off" id="kt_daterangepicker_1" required />
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+            <input type="button"  id="searchBtn" class="search-btn" value="Search" />
+            <div class="triangle"></div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <script>
+        $(document).ready(function () {
+            $('input[name="dates"]').daterangepicker(
+                {
+                    locale: {
+                        format: 'DD/MM/YYYY'
+                    }
+                }
+            );
+
+            $("#searchBtn").on('click',function(){
+                var city = $("#city-list").find(":selected").text();
+                var brand = $("#brand-list").find(":selected").text();
+             
+
+                var startDate = $('#picker').data('daterangepicker').startDate.format('DD-MM-YYYY');
+                var endDate = $('#picker').data('daterangepicker').endDate.format('DD-MM-YYYY');
+
+                console.log(city);
+                console.log(brand);
+                console.log(startDate);
+                console.log(endDate);
+
+                sentSearchResult(city,brand,startDate,endDate);
+            })
+
+            function sentSearchResult(city,brand,startDate,endDate){
+                var data = {};
+                data.City = city;
+                data.Brand = brand;
+                data.StartDate = startDate;
+                data.EndDate = endDate;
+
+                var token = $("input[name='__RequestVerificationToken']").val();
+
+                $.ajax({
+                    type: "POST",
+                    headers:
+                    {
+                        "RequestVerificationToken": token
+                    },
+                    url: "@Url.Action("SearchData","Search")",
+                    data: {
+                        data: data,
+                    },
+                    success: function (data) {
+                          window.location.href = data;
+                    },
+                    error: function (req, status, error) {
+                    }
+                })
+            }
+        });
+    </script>
+}

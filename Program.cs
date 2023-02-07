@@ -18,6 +18,7 @@ builder.Services.AddControllersWithViews(opt => opt.Filters.Add(new AutoValidate
 
 // Data Access scoped
 builder.Services.TryAddScoped<IIdentityCustomDa, IdentityDa>();
+builder.Services.TryAddScoped<ISearchDa, SearchDa>();
 
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
