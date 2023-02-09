@@ -38,8 +38,17 @@ namespace ocrent.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _identityDa.Register(registerInfo);
-                return RedirectToAction("Login", "Identity");
+                if (registerInfo.Pass.Equals(registerInfo.ConfirmPass))
+                {
+                    await _identityDa.Register(registerInfo);
+                    return RedirectToAction("Login", "Identity");
+                }
+                else
+                {
+                    ModelState.AddModelError("ConfirmPass", "Password does not match!");
+                    return View("Register");
+                }
+
             }
             return View("Register");
         }
