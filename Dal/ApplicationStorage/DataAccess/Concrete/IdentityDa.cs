@@ -6,6 +6,7 @@ using Models.DatabaseModels;
 using Models.DataTransferObjects;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Security.Principal;
 using System.Text;
@@ -69,11 +70,13 @@ namespace Dal.ApplicationStorage.DataAccess.Concrete
         {
             try
             {
-                var userFromDb = await _db.Users.Where(x => x.Email.Equals(loginInfo.Email)).FirstOrDefaultAsync();
+                var userFromDb = await _db.Users.Include(x => x.Administrator).Include(x => x.Client).Include(x => x.BusinessUser).Where(x => x.Email.Equals(loginInfo.Email)).FirstOrDefaultAsync();
+                
                 if(userFromDb != null)
                 {
                     loginInfo.UserId = userFromDb.UserId;
                     loginInfo.ValidEmail = true;
+                    loginInfo.FirstName = userFromDb.FirstName;
                     if (userFromDb.Pass.Equals(loginInfo.Password))
                     {
                         loginInfo.ValidPassword = true;
@@ -82,6 +85,19 @@ namespace Dal.ApplicationStorage.DataAccess.Concrete
                     {
                         loginInfo.ValidPassword = false;
                     }
+                    if(userFromDb.Administrator != null)
+                    {
+                        loginInfo.Claim = "Administrator";
+                    }
+                    else if (userFromDb.BusinessUser != null)
+                    {
+                        loginInfo.Claim = "BusinessUser";
+                    }
+                    else
+                    {
+                        loginInfo.Claim = "Client";
+                    }
+
                 }
                 else
                 {

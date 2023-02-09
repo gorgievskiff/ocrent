@@ -1,4 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Authentication.Cookies;
+@using Microsoft.AspNetCore.Authentication;
+@using Microsoft.AspNetCore.Http;
+@using System.Security.Claims
+@inject IHttpContextAccessor Accessor
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -12,7 +19,15 @@
 <body>
     @{
         var userId = Context.Session.GetString("userId");
-        if(userId == null){
+        var username = Context.Session.GetString("firstname");
+        var email = Accessor.HttpContext.Session.GetString("email");
+        Claim? claim = null;
+        if(email!=null){
+            claim = Accessor.HttpContext.User.FindFirst(email);
+        }
+        //customClaim.Value
+
+        if(userId != null){
 
         }
     }
@@ -35,10 +50,21 @@
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Search" asp-action="Index">Search</a>
                         </li>
+
+                        @if(claim!=null){
+                            if (claim.Value.Equals("BusinessUser") || claim.Value.Equals("Administrator")){
+                                <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Company" asp-action="RegisterCompany">Register Company</a>
+                            </li>
+                            }
+                        }
                     </ul>
 
                     @if(@userId != null){
                         <ul class="navbar-nav flex-grow-1 justify-content-end">
+                            <li class="nav-item">
+                                <a class="nav-link text-white">Hello @username!</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link text-white" asp-area="" asp-controller="Identity" asp-action="Logout">Sign out</a>
                             </li>

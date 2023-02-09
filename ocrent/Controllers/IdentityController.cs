@@ -75,12 +75,9 @@ namespace ocrent.Controllers
                 }
                 HttpContext.Session.SetString("userId", userdetails.UserId.ToString());
                 HttpContext.Session.SetString("email", userdetails.Email);
+                HttpContext.Session.SetString("firstname", userdetails.FirstName);
 
-                //TODO-> Add claims based on user, Adminstrator, Client and BusinessUser
-                //Make logic for getting if user is administrator, client or business user in DataAccess Layer
-                //Change claims values from hardcoded strings to StaticDetail enum
-
-               await AddClaimAsync(model.Email, "BusinessUser");
+               await AddClaimAsync(model.Email, model.Claim);
 
             }
             else
@@ -95,7 +92,7 @@ namespace ocrent.Controllers
             var email = HttpContext.Session.GetString("email");
             var customClaim = HttpContext.User.FindFirst(email);
 
-            return Content($"User ovoj has custom claim value: {customClaim.Value}");
+            return Content($"Claim value: {customClaim.Value}");
         }
 
         private async Task AddClaimAsync(string email, string claimType)

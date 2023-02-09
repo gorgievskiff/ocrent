@@ -1,0 +1,56 @@
+﻿@{
+    ViewData["Title"] = "Register Company Page";
+}
+
+<div class="container py-5 text-light business-acc">
+    <h3 class="mb-5">Register your rent-a-car company</h3>
+    <form method="post">
+        <div class="form-group">
+            <label for="company-name" class="form-label">
+                Company name
+            </label>
+            <input type="text"
+                   id="company-name"
+                   class="form-control"
+                   autocomplete="off"
+                   required />
+        </div>
+        <div class="form-group">
+            <label for="company-email" class="form-label">
+               Company Email
+            </label>
+            <input type="email"
+                   id="company-email"
+                   class="form-control"
+                   autocomplete="off"
+                   required />
+        </div>
+        <div class="form-group">
+            <label for="company-owner" class="form-label">
+                Owner
+            </label>
+            <input type="text"
+                   id="company-owner"
+                   class="form-control"
+                   autocomplete="off"
+                   readonly />
+        </div>
+        <div class="form-group d-flex align-items-end">
+            <input type="submit"
+                   class="btn btn-success"
+                   value="Submit" />
+        </div>
+    </form>
+</div>
+
+<style>
+    .business-acc {
+        min-height: calc(100vh - 100px);
+    }
+
+        .business-acc form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+</style>
