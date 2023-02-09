@@ -1,0 +1,61 @@
+﻿@{
+    ViewData["Title"] = "Payment";
+}
+
+@{
+    <div class="container py-5">
+        <div class="payment">
+            <h1 class="text-center py-4">Payment</h1>
+            <div class="p-5">
+                <span class="price">Price: 60&euro;</span>
+                <br />
+                <br />
+                <label for="pcard">Select payment card</label>
+                <select id="pcard" class="form-control">
+                    <option></option>
+                    <option value="1111222233334444">1111222233334444</option>
+                    <option value="1111222233335555">1111222233335555</option>
+                </select>
+                <br />
+                <label for="cvc">CVC</label>
+                <input id="cvc" class="form-control" min="100" max="999" type="number" />
+                <button class="pay-btn d-block mx-auto mt-5">Pay</button>
+            </div>
+        </div>
+    </div>
+}
+
+<style>
+    label {
+        font-size: 19px;
+    }
+
+    .price {
+        font-weight: bold;
+        font-size: 30px;
+    }
+
+    .payment {
+        position: relative;
+        width: 700px;
+        background-color: white;
+        border-radius: 5px;
+        margin: auto auto;
+    }
+
+    .pay-btn {
+        min-width: 250px;
+        background-color: #121d33;
+        color: cornflowerblue;
+        font-weight: bold;
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+    }
+
+        .pay-btn:hover {
+            color: #121d33;
+            background-color: cornflowerblue;
+            box-shadow: 0 0 3px 2px cornflowerblue;
+        }
+</style>

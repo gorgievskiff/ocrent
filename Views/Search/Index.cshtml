@@ -1,0 +1,75 @@
+﻿@{
+    ViewData["Title"] = "Search";
+}
+
+<div class="container py-5 search-area">
+    <h1 class="text-light">Find your car</h1>
+    <form class="search-wrapper" method="post" enctype="multipart/form-data" asp-controller="Search" asp-action="Results">
+        <div class="d-flex justify-content-center align-items-center flex-column">
+            <label for="city-list">Select city</label>
+            <select id="city-list" class="form-control" required>
+                <option value=""></option>
+                <option value="1">Skopje</option>
+                <option value="2">Vinica</option>
+                <option value="3">Kumanovo</option>
+                <option value="4">Kocani</option>
+                <option value="5">Tetovo</option>
+                <option value="6">Stip</option>
+                <option value="7">Ohrid</option>
+                <option value="8">Prilep</option>
+                <option value="9">Dojran</option>
+                <option value="10">Bitola</option>
+                <option value="11">Berovo</option>
+                <option value="12">Delcevo</option>
+            </select>
+        </div>
+        <div class="d-flex justify-content-center align-items-center flex-column">
+            <label for="brand-list">Select brand</label>
+            <select id="brand-list" class="form-control" required>
+                <option value=""></option>
+                <option value="0">Any</option>
+                <option value="1">Audi</option>
+                <option value="2">BMW</option>
+                <option value="3">Citroen</option>
+                <option value="4">Ford</option>
+                <option value="5">Honda</option>
+                <option value="6">Jaguar</option>
+                <option value="7">Renault</option>
+                <option value="8">Mercedes</option>
+                <option value="9">Mini</option>
+                <option value="10">Nissan</option>
+                <option value="11">Toyota</option>
+                <option value="12">Volvo</option>
+            </select>
+        </div>
+        <div class="d-flex justify-content-center align-items-center flex-column">
+            <label class="m-1 form-label" for="kt_daterangepicker_1">Select date & time</label>
+            <input class="form-control" style="min-width: 350px;" name="dates" autocomplete="off" id="kt_daterangepicker_1" required />
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+            <input type="submit" class="search-btn" value="Search" />
+            <div class="triangle"></div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <script src="~/lib/timepicker-ui-main/timepicker-ui-main/dist/timepicker-ui.umd.js" defer></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/js/bootstrap-timepicker.js" integrity="sha512-tlmsbYa/wD9/w++n4nY5im2NEhotYXO3k7WP9/ds91gJk3IqkIXy9S0rdMTsU4n7BvxCR3G4LW2fQYdZedudmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        $(document).ready(function () {
+            $('input[name="dates"]').daterangepicker(
+                {
+                    timePicker: true,
+                    minDate: moment().startOf('hour'),
+                    locale: {
+                        format: 'DD/MM/YYYY hh:mm A'
+                    }
+                }
+            );
+            $('input[name="dates"]').val("")
+        });
+    </script>
+}

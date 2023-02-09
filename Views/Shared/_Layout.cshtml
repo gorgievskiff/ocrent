@@ -4,45 +4,89 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - OCRent</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/css/bootstrap-timepicker.css" integrity="sha512-E4kKreeYBpruCG4YNe4A/jIj3ZoPdpWhWgj9qwrr19ui84pU5gvNafQZKyghqpFIHHE4ELK7L9bqAv7wfIXULQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">OCRent</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+        <nav class="navbar d-flex justify-content-between align-items-center navbar-expand-sm navbar-toggleable-sm">
+            <div class="d-flex">
+                <a class="d-inline-block navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="/img/ocrent_logo.png" alt="OCRent logo" />
+                </a>
+                <button class="navbar-toggler toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                    <i class="bi bi-grid-3x3-gap"></i>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="my-nav-links text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="my-nav-links text-light" asp-area="" asp-controller="Search" asp-action="Index">Search</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="my-nav-links text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Best companies</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="my-nav-links text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Create business account</a>
                         </li>
                     </ul>
                 </div>
             </div>
+            <div>
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="my-nav-links text-light" asp-area="" asp-controller="Auth" asp-action="Login">Sign in</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="my-nav-links text-light" asp-area="" asp-controller="Auth" asp-action="Register">Sign up</a>
+                    </li>
+                    
+                </ul>
+            </div>
         </nav>
     </header>
-    <div class="container">
+    <div>
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2022 - OCRent - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer class="d-flex justify-content-center align-items-center flex-column py-3">
+        <div class="f-first w-100 py-3 px-5 d-flex justify-content-center align-items-center">
+            <div>
+                <p class="px-3">Powered by OCRent™</p>
+            </div>
+            <div>
+                <button class="get-started-btn">Get started</button>
+            </div>
+            <div class="d-flex justify-content-center align-items-center">
+                <img src="/img/visa_master.png" alt="visa & mastercard" />
+            </div>
+        </div>
+        <div class="my-4 d-flex justify-content-start">
+            <p>
+                Copyrights &copy; Dario & Filip, @DateTime.Now.Year. All rights reserved.
+            </p>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdn.lordicon.com/qjzruarw.js"></script>
     @RenderSection("Scripts", required: false)
+    <style>
+        .toggler {
+            background-color: cornflowerblue;
+            color: #121d33;
+            font-size: 25px;
+        }
+    </style>
 </body>
 </html>

@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "CEsyuDXsprfPNX7mks08FGvFwl6+TZt2RHd3fxFINGpAyUizshGx/OrKrmkRdo8CR1JpJ6Pi7K3731Ad3n+FOQ==",
+  "dgSpecHash": "7HAZAdPT0gx9sahz8+OTIqtxHYCcsmMYD4/n4PEbLOCDWKDZRwrmnYA3TqahFkfNxmowJ6jDEJl2I4fox3inkA==",
   "success": true,
-  "projectFilePath": "E:\\OCRent\\OCRent\\OCRent.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\Dario\\Source\\Repos\\OCRent\\OCRent.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Dario\\.nuget\\packages\\bootstrap\\5.2.2\\bootstrap.5.2.2.nupkg.sha512",
+    "C:\\Users\\Dario\\.nuget\\packages\\jquery\\3.6.1\\jquery.3.6.1.nupkg.sha512"
+  ],
   "logs": []
 }

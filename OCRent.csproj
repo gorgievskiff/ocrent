@@ -4,4 +4,20 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Include="wwwroot\lib\timepicker-ui-main\timepicker-ui-main\.vscode\settings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\lib\timepicker-ui-main\timepicker-ui-main\.github\CODE_OF_CONDUCT.md" />
+    <None Include="wwwroot\lib\timepicker-ui-main\timepicker-ui-main\.github\CONTRIBUTING.md" />
+    <None Include="wwwroot\lib\timepicker-ui-main\timepicker-ui-main\.github\dependabot.yml" />
+    <None Include="wwwroot\lib\timepicker-ui-main\timepicker-ui-main\.github\workflows\codeql-analysis.yml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="bootstrap" Version="5.2.2" />
+    <PackageReference Include="jQuery" Version="3.6.1" />
+  </ItemGroup>
+
 </Project>

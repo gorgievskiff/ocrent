@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "E:\\OCRent\\OCRent\\OCRent.csproj": {}
+    "C:\\Users\\Dario\\Source\\Repos\\OCRent\\OCRent.csproj": {}
   },
   "projects": {
-    "E:\\OCRent\\OCRent\\OCRent.csproj": {
+    "C:\\Users\\Dario\\Source\\Repos\\OCRent\\OCRent.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\OCRent\\OCRent\\OCRent.csproj",
+        "projectUniqueName": "C:\\Users\\Dario\\Source\\Repos\\OCRent\\OCRent.csproj",
         "projectName": "OCRent",
-        "projectPath": "E:\\OCRent\\OCRent\\OCRent.csproj",
-        "packagesPath": "C:\\Users\\gorgievskiff\\.nuget\\packages\\",
-        "outputPath": "E:\\OCRent\\OCRent\\obj\\",
+        "projectPath": "C:\\Users\\Dario\\Source\\Repos\\OCRent\\OCRent.csproj",
+        "packagesPath": "C:\\Users\\Dario\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Dario\\Source\\Repos\\OCRent\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\gorgievskiff\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Dario\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -43,6 +43,16 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "bootstrap": {
+              "target": "Package",
+              "version": "[5.2.2, )"
+            },
+            "jQuery": {
+              "target": "Package",
+              "version": "[3.6.1, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -61,7 +71,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.412\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.200\\RuntimeIdentifierGraph.json"
         }
       }
     }

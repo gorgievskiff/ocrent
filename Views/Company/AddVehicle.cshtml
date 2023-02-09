@@ -1,0 +1,170 @@
+﻿@{
+    ViewData["Title"] = "Add Vehicle Page";
+}
+
+<div class="container py-5 text-light">
+    <h3 class="mb-5">Add vehicle</h3>
+    <form>
+        <div class="mb-3">
+            <label for="car-brand" class="form-label">Brand</label>
+            <select onchange="changeHandler" id="car-brand" class="form-select form-control" aria-label="" required>
+                <option selected></option>
+                <option value="Audi">Audi</option>
+                <option value="Citroen">Citroen</option>
+                <option value="Opel">Opel</option>
+                <option value="Ford">Ford</option>
+                <option value="Volkswagen">Volkswagen</option>
+                <option value="Renault">Renault</option>
+                <option value="Hyundai">Hyundai</option>
+            </select>
+        </div>
+        <div class="mb-5">
+            <label for="car-model" class="form-label">Model</label>
+            <select id="car-model" class="form-select form-control" aria-label="" disabled required>
+                <option selected></option>
+            </select>
+        </div>
+        <div class="radio-area">
+            <div class="mb-3">
+                <label class="form-label font-weight-bold">Transmission</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" value="manual" name="transmission" id="manual-t" checked>
+                    <label class="form-check-label" for="manual-t">
+                        Manual
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" value="automatic" name="transmission" id="auto-t">
+                    <label class="form-check-label" for="auto-t">
+                        Automatic
+                    </label>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label font-weight-bold">Fuel efficiency</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="fuel" value="economic" id="economic" checked>
+                    <label class="form-check-label" for="manual-t">
+                        Economic
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" value="luxury" name="fuel" id="luxury">
+                    <label class="form-check-label" for="luxury">
+                        Luxury
+                    </label>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label font-weight-bold">Vehicle type</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="v-type" value="sedan" id="sedan" checked>
+                    <label class="form-check-label" for="sedan">
+                        Sedan
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" value="SUV" name="v-type" id="SUV">
+                    <label class="form-check-label" for="SUV">
+                        SUV
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" value="hatchback" name="v-type" id="hatchback">
+                    <label class="form-check-label" for="hatchback">
+                        Hatchback
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" value="mini" name="v-type" id="mini">
+                    <label class="form-check-label" for="mini">
+                        Mini
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="car-color" class="form-label">Color</label>
+            <select id="car-color" class="form-select form-control" aria-label="" required>
+                <option selected></option>
+                <option value="red">Red</option>
+                <option value="green">Green</option>
+                <option value="blue">Blue</option>
+                <option value="black">Black</option>
+                <option value="silver">Silver</option>
+                <option value="gray">Gray</option>
+                <option value="pink">Pink</option>
+                <option value="yellow">Yellow</option>
+                <option value="lightblue">Lightblue</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="car-year" class="form-label">Year of production</label>
+            <select id="car-year" class="form-select form-control" aria-label="@DateTime.Now.Year" required>
+                <option selected></option>
+                @for (int i = 1995; i <= DateTime.Now.Year; i++)
+                {
+                    <option value="@i"> @i </option>
+                }
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="car-image" class="form-label">Image</label>
+            <input id="car-image" class="form-control" type="url" />
+        </div>
+
+        <div class="mb-3">
+            <label for="car-chassis" class="form-label">Chassis number</label>
+            <input id="car-chassis" class="form-control" type="text" />
+        </div>
+
+        <div class="mb-3">
+            <label for="car-registration" class="form-label">Registration number</label>
+            <input id="car-registration" class="form-control" type="text" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <span id="text"></span>
+</div>
+
+<script>
+    var brands = ["Audi", "Citroen", "Opel", "Ford", "Renault", "Volkswagen", "Hyundai"];
+    var models = {
+        Audi: ["A4", "A5", "A6", "Q5"],
+        Citroen: ["C1"],
+        Opel: ["Corsa", "Astra", "Vectra"],
+        Ford: ["Eco sport", "Mondeo", "Focus"],
+        Renault: ["Koleos Intens", "Clio"],
+        Volkswagen: ["Passat", "Golf 6", "Golf 5"],
+        Hyundai: ["I10"]
+    }
+    var selected_models = [];
+
+    document.getElementById("car-brand").addEventListener("change", (event) => {
+        if (event.target.value) {
+            var model_input = document.getElementById("car-model");
+            model_input.disabled = false;
+            while (model_input.firstChild) {
+                model_input.removeChild(model_input.firstChild);
+            }
+            var current = models[event.target.value];
+            for (var i = 0; i < current.length; i++) {
+                model_input.appendChild(new Option(current[i], current[i]));
+            }
+        } else {
+            document.getElementById("car-model").disabled = true;
+            document.getElementById("car-model").value = "";
+        }
+    });
+</script>
+
+<style>
+    .radio-area {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+</style>

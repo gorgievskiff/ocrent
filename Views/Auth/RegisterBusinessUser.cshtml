@@ -1,0 +1,102 @@
+﻿@{
+    ViewData["Title"] = "Register Business User Page";
+}
+
+<div class="container text-light py-5 business-acc">
+    <h2 class="mb-5">Register as business user</h2>
+    <form method="post">
+        <div class="form-group">
+            <label for="f-name" class="form-label">
+                First name
+            </label>
+            <input type="text"
+                   id="f-name"
+                   class="form-control"
+                   autocomplete="off"
+                   required />
+        </div>
+        <div class="form-group">
+            <label for="l-name" class="form-label">
+                Last name
+            </label>
+            <input type="text"
+                   id="l-name"
+                   class="form-control"
+                   autocomplete="off"
+                   required />
+        </div>
+        <div class="form-group">
+            <label for="b-username" class="form-label">
+                Username
+            </label>
+            <input type="text"
+                   id="b-username"
+                   class="form-control"
+                   autocomplete="off"
+                   required
+                   minlength="5" />
+        </div>
+        <div class="form-group">
+            <label for="company-logo" class="form-label">
+                Email
+            </label>
+            <input type="email"
+                   id="b-email"
+                   class="form-control"
+                   autocomplete="off"
+                   required />
+        </div>
+        <div class="form-group">
+            <label for="b-password" class="form-label">
+                Password
+            </label>
+            <input type="password"
+                   id="b-password"
+                   class="form-control"
+                   autocomplete="off"
+                   required
+                   minlength="8" />
+        </div>
+        <div class="form-group">
+            <label for="b-cpassword" class="form-label">
+                Confirm password
+            </label>
+            <input type="password"
+                   id="b-cpassword"
+                   class="form-control"
+                   autocomplete="off"
+                   required
+                   minlength="8" />
+        </div>
+        <div class="form-group m-0 p-0">
+            <label for="cb-terms" class="form-label">
+                I agree to terms and conditions.
+            </label>
+            <input type="checkbox"
+                   id="cb-terms"
+                   class="form-check-input"
+                   required />
+        </div>
+        <div>
+            <input type="submit"
+                   class="btn btn-success"
+                   value="Create account" />
+        </div>
+    </form>
+</div>
+
+
+<style>
+    .business-acc {
+        min-height: calc(100vh - 100px);
+    }
+
+        .business-acc form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+        input[type="checkbox"] {
+            margin-left: 15px;
+        }
+</style>

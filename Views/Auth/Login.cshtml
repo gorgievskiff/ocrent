@@ -1,0 +1,73 @@
+﻿@{
+    ViewData["Title"] = "Login Page";
+}
+
+<div class="auth-wrapper">
+    <div class="auth d-flex justify-content-center align-items-center flex-column">
+        <h3>Sign in</h3>
+        <span class="text-muted">Enter your credentials</span>
+        <form>
+            <input id="username" type="text" placeholder="Username" autocomplete="off" required />
+            <input id="password"
+                   type="password"
+                   placeholder="Password"
+                   required
+                   maxlength="8" />
+            <div class="form-check pt-2">
+                <label for="cb-bua" class="form-label">
+                    I have business account.
+                </label>
+                <input type="checkbox"
+                       id="cb-bua"
+                       class="form-check-input" />
+            </div>
+            <input type="submit" value="Sign in" />
+            <p>
+                Don't have an account? @Html.ActionLink("Sign up", "Register", "Auth")
+            </p>
+        </form>
+    </div>
+</div>
+
+<style>
+    auth-wrapper {
+        min-height: calc(100vh - 80px);
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .auth {
+        padding: 50px;
+        width: 500px;
+        box-shadow: 0 0 2px 1px #f1f1f1;
+        margin: 25px auto;
+        color: white;
+        border-radius: 15px;
+    }
+
+        .auth input[type="text"], .auth input[type="password"], .auth input[type="submit"] {
+            display: block;
+            padding: 10px;
+            margin: 15px auto;
+            min-width: 250px;
+        }
+
+        .auth input[type="checkbox"] {
+            margin-left: 15px;
+        }
+
+        .auth input[type="submit"] {
+            background-color: cornflowerblue;
+            color: white;
+        }
+
+            .auth input[type="submit"]:hover {
+                opacity: 0.9;
+            }
+
+        .auth span {
+            margin-bottom: 30px;
+        }
+</style>

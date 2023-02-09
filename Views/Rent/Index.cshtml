@@ -1,0 +1,83 @@
+﻿@model ContractModel;
+
+@{
+    ViewData["Title"] = $"Renting {@Model.car.brand} {@Model.car.model.model_name}";
+}
+
+@{
+    <div class="container my-5">
+        <div class="contract p-3">
+            <h1>Rent-a-car contract</h1>
+            <div class="w-100 d-flex justify-content-between align-items-center px-5 pt-5 pb-2">
+                <span><b>Start date</b>: @DateTime.Now</span>
+                <span><b>End date</b>: @DateTime.Today.AddDays(2).AddHours(7)</span>
+            </div>
+            <div class="w-100 px-5 py-2">
+                <span><b>Vehicle</b>: @Model.car.brand @Model.car.model.model_name (@Model.car.model.year)</span>
+            </div>
+            <div class="w-100 px-5 py-2">
+                <span><b>Client</b>: @Model.client.f_name.ToUpper() @Model.client.l_name.ToUpper() (@Model.client.username)</span>
+            </div>
+            <div class="w-100 px-5 py-2">
+                <span><b>Client contact</b>: @Model.client.email</span>
+            </div>
+            <div class="w-100 px-5 py-2">
+                <span><b>Daily rental price</b>: @Model.car.daily_rental_price&euro;</span>
+            </div>
+            <div class="w-100 px-5 py-2">
+                <span><b>Equipment</b>: Navigation (5&euro;)</span>
+            </div>
+            <div class="w-100 px-5 py-2">
+                <span><b>Total price</b>: @(@Model.car.daily_rental_price*3+5)&euro;</span>
+            </div>
+            <span class="current_date">@DateTime.Now</span>
+            <button class="go-back">Go back</button>
+            @Html.ActionLink("Proceed to payment", "Payment", "Rent", null, new { @class = "proceed-to-payment text-center" })
+        </div>
+    </div>
+}
+
+<style>
+    .contract {
+        position: relative;
+        width: 700px;
+        min-height: 500px;
+        background-color: white;
+        border-radius: 5px;
+        margin: auto auto;
+    }
+
+    .proceed-to-payment, .go-back {
+        min-width: 250px;
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        background-color: #121d33;
+        color: cornflowerblue;
+        font-weight: bold;
+        padding: 10px;
+        border-radius: 5px;
+    }
+    .go-back {
+        right: auto;
+        bottom: 20px;
+        left: 20px;
+    }
+        .proceed-to-payment:hover, .go-back:hover {
+            color: #121d33;
+            background-color: cornflowerblue;
+            box-shadow: 0 0 3px 2px cornflowerblue;
+            border: none;
+        }
+
+    .current_date {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background-color: #121d33;
+        color: cornflowerblue;
+        font-weight: bold;
+        padding: 10px;
+        border-radius: 5px;
+    }
+</style>
