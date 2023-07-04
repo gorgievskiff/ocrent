@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Models.DatabaseModels;
 using Models.DataTransferObjects;
+using ocrent;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -17,9 +18,9 @@ namespace Dal.ApplicationStorage.DataAccess.Concrete
     public class IdentityDa : IIdentityCustomDa
     {
         private readonly ApiContext _db;
-        private static ILogger<ApiContext> _logger;
+        private static ILogger<IdentityDa> _logger;
 
-        public IdentityDa(ApiContext db,ILogger<ApiContext> logger)
+        public IdentityDa(ApiContext db,ILogger<IdentityDa> logger)
         {
             _db = db;
             _logger = logger;

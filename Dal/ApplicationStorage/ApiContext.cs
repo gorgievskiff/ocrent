@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Models.DatabaseModels;
+using ocrent;
 
 namespace Dal.ApplicationStorage;
 
@@ -265,6 +266,7 @@ public partial class ApiContext : DbContext
             entity.Property(e => e.VehicleType)
                 .HasMaxLength(30)
                 .HasColumnName("vehicle_type");
+            entity.Property(e => e.ImgUrl).HasColumnName("img_url");
         });
 
         modelBuilder.Entity<Payment>(entity =>

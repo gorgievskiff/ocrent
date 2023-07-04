@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Models.DatabaseModels;
+namespace ocrent;
 
 public partial class Client
 {
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int UserId { get; set; }
 
     public virtual ICollection<Contract> Contracts { get; } = new List<Contract>();

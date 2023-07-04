@@ -17,9 +17,9 @@ namespace Dal.ApplicationStorage.DataAccess.Concrete
     public class SearchDa : ISearchDa
     {
         private readonly ApiContext _db;
-        private static ILogger<ApiContext> _logger;
+        private static ILogger<SearchDa> _logger;
 
-		public SearchDa(ApiContext db, ILogger<ApiContext> logger)
+		public SearchDa(ApiContext db, ILogger<SearchDa> logger)
 		{
             _db = db;
             _logger = logger;
@@ -46,7 +46,6 @@ namespace Dal.ApplicationStorage.DataAccess.Concrete
 				throw;
 			}
         }
-
         public async Task<List<SearchBrandsDTO>> GetVehicleBrands()
         {
             try
@@ -69,7 +68,6 @@ namespace Dal.ApplicationStorage.DataAccess.Concrete
                 throw;
             }
         }
-
         public async Task<List<CarsDTO>> GetVehiclesBySearchParameters(SearchJSON data)
         {
             try
@@ -78,6 +76,7 @@ namespace Dal.ApplicationStorage.DataAccess.Concrete
                              join locations in _db.Locations on vehicles.LocationId equals locations.LocationId
                              join models in _db.Models on vehicles.ModelId equals models.ModelId
                              join registrations in _db.Registrations on vehicles.RegistrationId equals registrations.RegistrationId
+                             join companies in _db.Companies on vehicles.CompanyId equals companies.CompanyId
                              select new CarsDTO()
                              {
                                  CarId = vehicles.VehicleId,
@@ -92,7 +91,9 @@ namespace Dal.ApplicationStorage.DataAccess.Concrete
                                  FuelEfficiency = vehicles.FuelEfficiency,
                                  DailyRentalPrice = (double)vehicles.DailyRentalPrice,
                                  City = locations.City,
-                                 IsAvailable = registrations.IsAvailable
+                                 IsAvailable = registrations.IsAvailable,
+                                 ImgUrl = models.ImgUrl,
+                                 CompanyName  = companies.CompanyName
                              }
                              ).Where(x => x.Brand == data.Brand && x.City == data.City && x.IsAvailable)
                              .ToListAsync();
@@ -105,7 +106,6 @@ namespace Dal.ApplicationStorage.DataAccess.Concrete
                 throw;
             }
         }
-
         public async Task<List<CarsDTO>> GetAllVehicles()
         {
             try
@@ -114,6 +114,7 @@ namespace Dal.ApplicationStorage.DataAccess.Concrete
                                    join locations in _db.Locations on vehicles.LocationId equals locations.LocationId
                                    join models in _db.Models on vehicles.ModelId equals models.ModelId
                                    join registrations in _db.Registrations on vehicles.RegistrationId equals registrations.RegistrationId
+                                   join companies in _db.Companies on vehicles.CompanyId equals companies.CompanyId
                                    select new CarsDTO()
                                    {
                                        CarId = vehicles.VehicleId,
@@ -128,9 +129,88 @@ namespace Dal.ApplicationStorage.DataAccess.Concrete
                                        FuelEfficiency = vehicles.FuelEfficiency,
                                        DailyRentalPrice = (double)vehicles.DailyRentalPrice,
                                        City = locations.City,
-                                       IsAvailable = registrations.IsAvailable
+                                       IsAvailable = registrations.IsAvailable,
+                                       ImgUrl = models.ImgUrl,
+                                       CompanyName = companies.CompanyName
                                    }
-                             ).ToListAsync();
+                             ).Where(x => x.IsAvailable)
+                             .ToListAsync();
+
+                return query;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+                throw;
+            }
+        }
+        public async Task<List<CarsDTO>> GetVehilcesByLocation(SearchJSON data)
+        {
+            try
+            {
+                var query = await (from vehicles in _db.Vehicles
+                                   join locations in _db.Locations on vehicles.LocationId equals locations.LocationId
+                                   join models in _db.Models on vehicles.ModelId equals models.ModelId
+                                   join registrations in _db.Registrations on vehicles.RegistrationId equals registrations.RegistrationId
+                                   join companies in _db.Companies on vehicles.CompanyId equals companies.CompanyId
+                                   select new CarsDTO()
+                                   {
+                                       CarId = vehicles.VehicleId,
+                                       Brand = vehicles.Brand,
+                                       Model = models.ModelName,
+                                       Color = models.Color,
+                                       ModelYear = models.ModelYear.Year,
+                                       NumSeats = models.NumOfSeats,
+                                       NumOfDoors = models.NumOfDoors,
+                                       Fuel = models.Fuel,
+                                       Transmission = models.Transmission,
+                                       FuelEfficiency = vehicles.FuelEfficiency,
+                                       DailyRentalPrice = (double)vehicles.DailyRentalPrice,
+                                       City = locations.City,
+                                       IsAvailable = registrations.IsAvailable,
+                                       ImgUrl = models.ImgUrl,
+                                       CompanyName = companies.CompanyName
+                                   }
+                             ).Where(x => x.City == data.City && x.IsAvailable)
+                             .ToListAsync();
+
+                return query;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+                throw;
+            }
+        }
+        public async Task<List<CarsDTO>> GetVehiclesByBrand(SearchJSON data)
+        {
+            try
+            {
+                var query = await (from vehicles in _db.Vehicles
+                                   join locations in _db.Locations on vehicles.LocationId equals locations.LocationId
+                                   join models in _db.Models on vehicles.ModelId equals models.ModelId
+                                   join registrations in _db.Registrations on vehicles.RegistrationId equals registrations.RegistrationId
+                                   join companies in _db.Companies on vehicles.CompanyId equals companies.CompanyId
+                                   select new CarsDTO()
+                                   {
+                                       CarId = vehicles.VehicleId,
+                                       Brand = vehicles.Brand,
+                                       Model = models.ModelName,
+                                       Color = models.Color,
+                                       ModelYear = models.ModelYear.Year,
+                                       NumSeats = models.NumOfSeats,
+                                       NumOfDoors = models.NumOfDoors,
+                                       Fuel = models.Fuel,
+                                       Transmission = models.Transmission,
+                                       FuelEfficiency = vehicles.FuelEfficiency,
+                                       DailyRentalPrice = (double)vehicles.DailyRentalPrice,
+                                       City = locations.City,
+                                       IsAvailable = registrations.IsAvailable,
+                                       ImgUrl = models.ImgUrl,
+                                       CompanyName = companies.CompanyName
+                                   }
+                             ).Where(x => x.Brand == data.Brand.Trim() && x.IsAvailable)
+                             .ToListAsync();
 
                 return query;
             }

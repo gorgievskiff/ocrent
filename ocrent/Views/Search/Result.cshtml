@@ -22,7 +22,7 @@
                         <span class="fuel-eff eco">@item.FuelEfficiency</span>
                     }
                     <div class="d-flex justify-content-between align-items-center">
-                        <img src="https://cdn.motor1.com/images/mgl/RZ7e9/s1/copertina-citroen-c1-piu-colore-e-tecnologia.webp" alt="slika" />
+                        <img src="@item.ImgUrl" alt="slika" />
                         <div class="d-flex justify-content-center align-items-center">
                             <div class="d-flex flex-column justify-content-center align-items-center mx-3">
                                 <img src="~/img/icons/gearbox.png" alt="car seat" class="ad-icons" />
@@ -48,7 +48,7 @@
                     </div>
                     <hr />
                     <div class="d-flex justify-content-between align-items-center flex-wrap px-3">
-                        <img class="company-logo" src="~/img/ocrent_logo.png" alt="ocrent logo" />
+                        <p>@item.CompanyName</p>
                         <span class="price">@item.DailyRentalPrice$ / day</span>
                     </div>
                     <hr />

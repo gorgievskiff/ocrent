@@ -14,5 +14,7 @@ namespace Dal.ApplicationStorage.DataAccess.Abstract
         Task<List<SearchBrandsDTO>> GetVehicleBrands();
         Task<List<CarsDTO>> GetVehiclesBySearchParameters(SearchJSON data);
         Task<List<CarsDTO>> GetAllVehicles();
+        Task<List<CarsDTO>> GetVehilcesByLocation(SearchJSON data);
+        Task<List<CarsDTO>> GetVehiclesByBrand(SearchJSON data);
     }
 }

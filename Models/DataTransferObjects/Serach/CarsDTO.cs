@@ -21,7 +21,8 @@ namespace Models.DataTransferObjects.Serach
         public double DailyRentalPrice { get; set; }
         public string City { get; set; }
         public bool IsAvailable { get; set; }
-
+        public string ImgUrl { get; set; }
+        public string CompanyName { get; set; }
 
     }
 }

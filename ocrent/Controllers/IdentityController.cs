@@ -67,7 +67,7 @@ namespace ocrent.Controllers
                 if (!userdetails.ValidPassword || !userdetails.ValidEmail)
                 {
                     if (!userdetails.ValidEmail)
-                        ModelState.AddModelError("Email", "Wrong email or password.");
+                        ModelState.AddModelError("Email", "There is no user with this email");
                     else
                         ModelState.AddModelError("Password", "Wrong password.");
                     

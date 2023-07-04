@@ -2,7 +2,137 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div>
+    <div class="jumbotron d-flex align-items-center justify-content-center">
+        <div class="container d-flex align-items-center justify-content-center flex-column gap">
+            <h1 class="text-center">One click rent. Rent the best car for you fast and easy.</h1>
+            <img src="/img/car.png" alt="car" />
+        </div>
+    </div>
+    <div class="w-100 d-flex justify-content-evenly align-items-center">
+        <div class="info px-5 py-5 d-flex justify-content-center align-items-center">
+            <lord-icon src="https://cdn.lordicon.com/tftaqjwp.json"
+                       trigger="loop"
+                       delay="1000"
+                       style="width: 50px; height: 50px"></lord-icon>
+            <div class="info-text">
+                <h3>Customer service.</h3>
+                <span>We're here to help if you need.</span>
+            </div>
+        </div>
+        <div class="info px-5 py-5 d-flex justify-content-center align-items-center">
+            <lord-icon src="https://cdn.lordicon.com/yqzmiobz.json"
+                       trigger="loop"
+                       delay="1000"
+                       style="width: 50px; height: 50px"></lord-icon>
+            <div class="info-text">
+                <h3>Free cancellation.</h3>
+                <span>Available on most cars.</span>
+            </div>
+        </div>
+        <div class="info px-5 py-5 d-flex justify-content-center align-items-center">
+            <lord-icon src="https://cdn.lordicon.com/qvbrkejx.json"
+                       trigger="loop"
+                       delay="1000"
+                       style="width: 50px; height: 50px"></lord-icon>
+            <div class="info-text">
+                <h3>Customer reviews.</h3>
+                <span>By real, verified customers.</span>
+            </div>
+        </div>
+    </div>
+    <div class="my-5 px-5">
+        <h3 class="text-light">Frequently asked questions</h3>
+        <div id="accordion">
+            <div class="card my-2">
+                <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            What do I need to rent a car?
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-bs-parent="#accordion">
+                    <div class="card-body">
+                        <p>When you’re booking the car, you just need a debit or credit card.</p>
+                        <p>
+                            <strong>Important</strong>: Please make sure you check the
+                            car’s rental terms as well, as each rental company has its own
+                            rules. For example? They might need to see some extra ID. They
+                            might not accept certain types of credit card. Or they might
+                            not rent to any driver who hasn’t held their driving licence
+                            for 36 months or more.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="card my-2">
+                <div class="card-header" id="headingTwo">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Am I old enough to rent a car?
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-bs-parent="#accordion">
+                    <div class="card-body">
+                        <p>
+                            Most companies will rent you a car if you’re at least 21 (and
+                            some will rent to younger drivers). But if you’re under 25,
+                            you might still have to pay a ‘young driver fee’.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="card my-2">
+                <div class="card-header" id="headingThree">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Can I book a car for my partner, friend, colleague etc?
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-bs-parent="#accordion">
+                    <div class="card-body">
+                        <p>
+                            Of course. Just put their details in the ‘Driver Details’ form
+                            when you’re booking the car.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="card my-2">
+                <div class="card-header" id="headingFour">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            Is the rental price all inclusive?
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-bs-parent="#accordion">
+                    <div class="card-body">
+                        <p>
+                            The price you see includes the car, mandatory cover (e.g.
+                            Theft Protection and Collision Damage Waiver) and fees that,
+                            if they apply, are usually payable at pick-up (e.g. any
+                            one-way fees, airport surcharges or local taxes).
+                        </p>
+                        <p>
+                            It also includes any extras you’ve already added (e.g. GPS or
+                            baby seats).
+                        </p>
+                        <p>
+                            It doesn’t include any extra cover you buy when you get to the
+                            rental counter.
+                        </p>
+                        <p>
+                            <b>
+                                Tip: There’s a full price breakdown on the Payment page.
+                            </b>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

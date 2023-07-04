@@ -1,0 +1,52 @@
+﻿@model List<Models.DataTransferObjects.Company.UserCompaniesDTO>
+
+
+<div class="row">
+    <div class="col-md-12 pt-3">
+        <div class="card">
+            <div class="card-header text-white ">
+                <div class="card-title text-black">My Companies</div>
+            </div>
+            <div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped my-4 w-100" id="coachesTable">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Company Name
+                                    </th>
+                                    <th>
+                                        Company Email
+                                    </th>
+                                    <th>Is Approved</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach(var company in Model){
+                                  <tr>
+                                        <td>@company.CompanyName</td>
+                                        <td>@company.CompanyName</td>
+                                        @if(company.IsApproved){
+                                            <td><i class="fa-solid fa-check-double"></i></td>
+                                        }else{
+                                            <td><i class="fa-solid fa-user-xmark"></i></td>
+                                        }
+                                        <td>
+                                                @Html.ActionLink("", "Action", "Controller", new{@id = company.CompanyId}, new {
+                                            @class = "mb-1 btn btn-warning far fa-edit", @title = "Edit"
+                                            })
+                                        </td>
+                                  </tr>
+
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

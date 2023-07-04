@@ -49,6 +49,14 @@ namespace ocrent.Controllers
             {
                 model = await _searchDa.GetVehiclesBySearchParameters(data);
             }
+            else if(brand == null && city != null)
+            {
+                model = await _searchDa.GetVehilcesByLocation(data);
+            }
+            else if(brand != null && city == null)
+            {
+                model = await _searchDa.GetVehiclesByBrand(data);
+            }
             else
             {
                 model = await _searchDa.GetAllVehicles();

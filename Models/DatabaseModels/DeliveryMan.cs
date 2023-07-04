@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Models.DatabaseModels;
+namespace ocrent;
 
 public partial class DeliveryMan
 {

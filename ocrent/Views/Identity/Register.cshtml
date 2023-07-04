@@ -11,34 +11,34 @@
             @*<div asp-validation-summary="All" class="text-danger"></div>*@
             <div class="form-group">
                 <label asp-for="Email">Email</label>
-                <input asp-for="Email" class="form-control" />
+                <input asp-for="Email" autocomplete="off" class="form-control" />
                 <span asp-for="Email" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="Username">Username</label>
-                <input asp-for="Username" class="form-control" />
+                <input asp-for="Username" autocomplete="off" class="form-control" />
                 <span asp-validation-for="Username" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="FirstName">First Name</label>
-                <input asp-for="FirstName" class="form-control" />
+                <input asp-for="FirstName" autocomplete="off" class="form-control" />
                 <span asp-validation-for="FirstName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="LastName">Last Name</label>
-                <input asp-for="LastName" class="form-control" />
+                <input asp-for="LastName" autocomplete="off" class="form-control" />
                 <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Pass">Password</label>
-                <input type="password" asp-for="Pass" class="form-control" />
+                <input type="password" autocomplete="off" asp-for="Pass" class="form-control" />
                 <span asp-validation-for="Pass" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ConfirmPass">Confirm password</label>
-                <input type="password" asp-for="ConfirmPass" class="form-control" />
+                <input type="password" autocomplete="off" asp-for="ConfirmPass" class="form-control" />
                 <span asp-validation-for="ConfirmPass" class="text-danger"></span>
             </div>
             <div class="form-group">

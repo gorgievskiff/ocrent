@@ -1,0 +1,53 @@
+﻿@model Models.DataTransferObjects.Administrator.AdministratorCompaniesDTO
+
+<div class="container py-5 text-light business-acc">
+    <h3 class="mb-5">Approve company</h3>
+    <form method="post" asp-action="ApproveCompany" asp-controller="Administrator">
+        <input type="hidden" asp-for="CompanyId" />
+        <div class="form-group">
+            <label for="company-name" class="form-label" asp-for="CompanyName">
+                Company Name
+            </label>
+            <input type="text" asp-for="CompanyName"
+                   id="company-name"
+                   class="form-control"
+                   disabled
+                    />
+        </div>
+        <div class="form-group">
+            <label for="company-email" class="form-label" asp-for="CompanyEmail">
+                Company Email
+            </label>
+            <input type="email" asp-for="CompanyEmail"
+                   id="company-email"
+                   class="form-control"
+                   disabled
+                    />
+        </div>
+        <div class="form-group">
+            <label for="company-email" class="form-label" asp-for="BusinessUserName">
+                Business User Name
+            </label>
+            <input type="email" asp-for="BusinessUserName"
+                   id="company-email"
+                   class="form-control"
+                    disabled
+                   />
+        </div>
+         <div class="form-group">
+            <label for="company-email" class="form-label" asp-for="BusinessUserEmail">
+                Business User Email
+            </label>
+            <input type="email" asp-for="BusinessUserEmail"
+                   id="company-email"
+                   class="form-control"
+                    disabled
+                    />
+        </div>
+        <div class="form-group d-flex align-items-end">
+            <input type="submit"  id="submit"
+                   class="btn btn-success"
+                   value="Approve" />
+        </div>
+    </form>
+</div>

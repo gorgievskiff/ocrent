@@ -1,25 +1,27 @@
-﻿@{
+﻿@model Models.DataTransferObjects.Company.RegisterCompanyDTO
+
+@{
     ViewData["Title"] = "Register Company Page";
 }
 
 <div class="container py-5 text-light business-acc">
     <h3 class="mb-5">Register your rent-a-car company</h3>
-    <form method="post">
+    <form method="post" asp-action="RegisterCompany" asp-controller="Company">
         <div class="form-group">
-            <label for="company-name" class="form-label">
+            <label for="company-name" class="form-label" asp-for="CompanyName">
                 Company name
             </label>
-            <input type="text"
+            <input type="text" asp-for="CompanyName"
                    id="company-name"
                    class="form-control"
                    autocomplete="off"
                    required />
         </div>
         <div class="form-group">
-            <label for="company-email" class="form-label">
+            <label for="company-email" class="form-label" asp-for="CompanyEmail">
                Company Email
             </label>
-            <input type="email"
+            <input type="email" asp-for="CompanyEmail"
                    id="company-email"
                    class="form-control"
                    autocomplete="off"
@@ -33,10 +35,11 @@
                    id="company-owner"
                    class="form-control"
                    autocomplete="off"
+                   value="@ViewBag.UserEmail"
                    readonly />
         </div>
         <div class="form-group d-flex align-items-end">
-            <input type="submit"
+            <input  id="submit"
                    class="btn btn-success"
                    value="Submit" />
         </div>
@@ -54,3 +57,90 @@
             gap: 25px;
         }
 </style>
+
+@section Scripts{
+    <script>
+        $(document).ready(function(){
+            var token = $("input[name='__RequestVerificationToken']").val();
+
+            $('#submit').on("click", function () {
+                var companyDTO = {};
+                companyDTO.CompanyName = $('#company-name').val();
+                companyDTO.CompanyEmail = $('#company-email').val();
+
+                if (companyDTO.CompanyName != "" && companyDTO.CompanyEmail != ""){
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "Are you sure that you want to sent an application for company registration?",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, submit!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 3000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                }
+                            })
+
+                            Toast.fire({
+                                icon: 'success',
+                                title: 'Application successfully submitted'
+                            })
+
+                            $.ajax({
+                                type: "POST",
+                                headers:
+                                {
+                                    "RequestVerificationToken": token
+                                },
+                                url: "@Url.Action("RegisterCompany","Company")",
+                                data: {
+                                    companyDTO: companyDTO,
+                                },
+                                success: function (data) {
+                                    window.location.href = data;
+                                },
+                                error: function (req, status, error) {
+                                }
+                            })
+
+
+                        }
+                    })
+                }else{
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })
+
+                    Toast.fire({
+                        icon: 'error',
+                        title: 'Both fields are required!'
+                    })
+                }
+
+               
+            })
+            
+
+
+            
+        })
+    </script>
+}

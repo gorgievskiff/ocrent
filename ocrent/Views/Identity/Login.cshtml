@@ -4,9 +4,7 @@
     ViewData["Title"] = "Login";
 }
 
-{
-    ViewData["Title"] = "Login Page";
-}
+
 
 <div class="auth-wrapper">
     <div class="auth d-flex justify-content-center align-items-center flex-column">
@@ -16,7 +14,7 @@
                 <div asp-validation-summary="All" class="text-danger"></div>
                 <div class="form-group">
                     <label asp-for="Email">Email</label>
-                    <input asp-for="Email" class="form-control" />
+                    <input asp-for="Email" autocomplete="off" class="form-control" />
                     <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
                 <div class="form-group">

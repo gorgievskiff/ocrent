@@ -1,0 +1,60 @@
+﻿@using Microsoft.AspNetCore.Antiforgery
+@model List<Models.DataTransferObjects.Administrator.AdministratorCompaniesDTO>
+@inject IAntiforgery antiforgery
+
+
+<div class="row">
+    <div class="col-md-12 pt-3">
+        <div class="card">
+            <div class="card-header text-white ">
+                <div class="card-title text-black">All Companies</div>
+            </div>
+            <div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped my-4 w-100" id="coachesTable">
+                            <thead>
+                                <tr>
+                                    <th>Company Name</th>
+                                    <th>Company Email</th>
+                                    <th>Business User Name</th>
+                                    <th>Business User Email</th>
+                                    <th>Is Approved</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var company in Model)
+                                {
+                                    <tr>
+                                        <td>@company.CompanyName</td>
+                                        <td>@company.CompanyEmail</td>
+                                        <td>@company.BusinessUserName</td>
+                                        <td>@company.BusinessUserEmail</td>
+                                        <td><i class="@(company.IsApproved ? "fa-solid fa-check-double": "fa-solid fa-user-xmark")"></i></td>
+                                        <td>
+                                            @Html.ActionLink("", "Action", "Controller", new{@companyId = company.CompanyId}, new {
+                                        @class = "mb-1 btn btn-warning far fa-edit", @title = "Edit"
+                                        })
+
+                                           @if(!company.IsApproved){
+                                                    @Html.ActionLink("", "ApproveCompany", "Administrator", new{@companyId = company.CompanyId}, new {
+                                            @class = "mb-1 btn btn-success fa-solid fa-check-double", @title = "Approve Company"
+                                            })
+                                           }
+                                            @*<a  class="mb-1 btn btn-success fa-solid fa-check-double" title="Approve Company" id="approve" value="@company.CompanyId"></a>*@
+                                        </td>
+                                    </tr>
+
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+

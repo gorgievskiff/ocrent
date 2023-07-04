@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Models.DatabaseModels;
+namespace ocrent;
 
 public partial class Model
 {
@@ -22,6 +22,8 @@ public partial class Model
     public string Transmission { get; set; } = null!;
 
     public string VehicleType { get; set; } = null!;
+
+    public string? ImgUrl { get; set; }
 
     public virtual ICollection<Vehicle> Vehicles { get; } = new List<Vehicle>();
 }
